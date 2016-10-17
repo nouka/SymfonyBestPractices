@@ -14,4 +14,4 @@ Discover the best practices that fit the philosophy of the framework as envision
  - [Internationalization](./i18n.md)
  - [Security](./security.md)
  - [Web Assets](./web-assets.md)
- - [Tests](./tests.md)
+ - [テスト](./tests.md)
