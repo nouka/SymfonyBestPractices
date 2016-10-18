@@ -1,7 +1,7 @@
 # このリポジトリ」は
 Symfonyベストプラクティス集をチームで学ぶために、日本語に翻訳してみる。
 
-# Symfony Best Practices
+# Symfonyベストプラクティス集
 Discover the best practices that fit the philosophy of the framework as envisioned by its original creator Fabien Potencier. Learn a new pragmatic vision for Symfony application development and boost your productivity.
 
  - [The Symfony Framework Best Practices](./introduction.md)
