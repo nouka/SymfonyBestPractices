@@ -5,7 +5,7 @@ Symfonyベストプラクティス集をチームで学ぶために、日本語�
 Discover the best practices that fit the philosophy of the framework as envisioned by its original creator Fabien Potencier. Learn a new pragmatic vision for Symfony application development and boost your productivity.
 
  - [Symfony ベストプラクティス集](./introduction.md)
- - [Creating the Project](./creating-the-project.md)
+ - [プロジェクトの作成](./creating-the-project.md)
  - [Configuration](./configuration.md)
  - [Organizing Your Business Logic](./business-logic.md)
  - [Controllers](./controllers.md)
