@@ -1,45 +1,45 @@
-# The Symfony Framework Best Practices
-The Symfony Framework is well-known for being really flexible and is used to build micro-sites, enterprise applications that handle billions of connections and even as the basis for other frameworks. Since its release in July 2011, the community has learned a lot about what's possible and how to do things best.
+# Symfonyベストプラクティス集
+Symfonyはとても柔軟なフレームワークとして知られており、小規模サイトから何十億ものコネクションを処理するエンタープライズアプリケーションの開発で利用されています。また他のフレームワークの基盤にもなっています。2011年7月にリリースされて以来、コミュニティはSymfonyで何ができて、何が一番良い方法かについて多くのことを学びました。
 
-These community resources - like blog posts or presentations - have created an unofficial set of recommendations for developing Symfony applications. Unfortunately, a lot of these recommendations are unneeded for web applications. Much of the time, they unnecessarily overcomplicate things and don't follow the original pragmatic philosophy of Symfony.
+しかしこれらのコミュニティのリソース、たとえばブログの記事やプレゼンテーションなどが、Symfonyアプリケーションを開発する際の非公式な推奨案を生み出してきました。残念ながらこれらの多くの推奨案はwebアプリケーションにとって必要ではありません。大抵の場合、これらの推奨案は物事をむやみに複雑化し、本来のSymfonyの哲学に従っていません。
 
-## What is this Guide About?
-This guide aims to fix that by describing the best practices for developing web apps with the Symfony full-stack Framework. These are best practices that fit the philosophy of the framework as envisioned by its original creator Fabien Potencier.
+## このガイドについて
+このガイドはフルスタックフレームワークSymfonyを使ってwebアプリケーションを開発するためのベストプラクティスを記述することで、この状況を正すことが目的です。このベストプラクティスはフレームワークの原作者Fabien Potencierによって描かれたフレームワークの哲学にのっとっています。
 
-> Best practice is a noun that means "a well defined procedure that is known to produce near-optimum results". And that's exactly what this guide aims to provide. Even if you don't agree with every recommendation, we believe these will help you build great applications with less complexity.
+> Best practiceは最適な結果を生成することが知られている明確に定義された手順を意味します。それはまさにこのガイドが提供することを目的としているものです。たとえすべての勧告に同意できなくても、これらはよりシンプルにアプリケーションを構築する助けになると私たちは信じています。
 
-This guide is specially suited for:
+このガイドは次のような場合に特に適してます：
 
- - Websites and web applications developed with the full-stack Symfony Framework.
+ - フルスタックSymfonyフレームワークを使ってのウェブサイトやwebアプリケーションの開発
 
- For other situations, this guide might be a good starting point that you can then extend and fit to your specific needs:
+それ以外にも、Symfonyを拡張しあなたの特定の用途にあわせるときの、スタート地点としてこのガイドは有用でしょう：
 
- - Bundles shared publicly to the Symfony community;
- - Advanced developers or teams who have created their own standards;
- - Some complex applications that have highly customized requirements;
- - Bundles that may be shared internally within a company.
+ - Symfonyコミュニティにバンドルを公開し共有するとき;
+ - 上級開発者やチームが自分たちのスタンダードを作るとき;
+ - 高度なカスタマイズが必要とされる複雑なアプリケーションを開発するとき;
+ - 社内限定でバンドルを共有するとき;
 
-We know that old habits die hard and some of you will be shocked by some of these best practices. But by following these, you'll be able to develop apps faster, with less complexity and with the same or even higher quality. It's also a moving target that will continue to improve.
+古い習慣はなかなか滅びないでしょうし、ベストプラクティスのいくつかを見てショックを受ける人がいるかもしれません。しかしベストプラクティスに従えばアプリケーションをより高速に、複雑さを抑えながら、より高品質に作ることができます。ベストプラクティスはまた、自ら改善しつづける動く標的(moving target)でもあります。
 
- Keep in mind that these are optional recommendations that you and your team may or may not follow to develop Symfony applications. If you want to continue using your own best practices and methodologies, you can of course do it. Symfony is flexible enough to adapt to your needs. That will never change.
+これらは任意の推奨案であることを覚えておいてください。あなたやあなたのチームはこれら推奨案に従っても従わなくてもよいのです。もしあなたが自分のベストプラクティスと方法論を使い続けたいのなら、もちろんそれもよいでしょう。Symfonyは柔軟なのであなたのニーズに合わせることができます。
 
-## Who this Book Is for (Hint: It's not a Tutorial)
-Any Symfony developer, whether you are an expert or a newcomer, can read this guide. But since this isn't a tutorial, you'll need some basic knowledge of Symfony to follow everything. If you are totally new to Symfony, welcome! Start with The Quick Tour tutorial first.
+## これは誰のためのドキュメントか (ヒント: これはチュートリアルではありません)
+上級者であれ初級者であれ、すべてのSymfony開発者はこのガイドを読むことができます。しかしこのガイドはチュートリアルではないので、実践しようと思ったらSymfonyの基礎知識が必要になるでしょう。全くの初心者であれば、クイックツアーチュートリアルから始めてみてください。
 
-We've deliberately kept this guide short. We won't repeat explanations that you can find in the vast Symfony documentation, like discussions about Dependency Injection or front controllers. We'll solely focus on explaining how to do what you already know.
+このガイドはわざと短くしています。膨大なSymfonyのドキュメント内に既にある事柄については繰り返し説明はしません。例えばDependency Injectionやフロントコントローラーなどの話題がそうです。あなたが既に知っていることについてどうすべきかということにフォーカスしています。
 
-## The Application
-In addition to this guide, a sample application has been developed with all these best practices in mind. This project, called the Symfony Demo application, can be obtained through the Symfony Installer. First, download and install the installer and then execute this command to download the demo application:
+## アプリケーション
+このガイドに加えて、ベストプラクティスを全部詰め込んだサンプルアプリケーションを用意しました。このプロジェクトはSymfonyデモアプリケーションと呼ばれており、Symfonyインストーラで入手することができます。まず、download and installのページを見てインストーラを入手してから下記コマンドを実行してデモアプリケーションをダウンロードしてください:
 
 ```
 $ symfony demo
 ```
 
-The demo application is a simple blog engine, because that will allow us to focus on the Symfony concepts and features without getting buried in difficult implementation details. Instead of developing the application step by step in this guide, you'll find selected snippets of code through the chapters.
+デモアプリケーションはシンプルなブログエンジンです。理由はこれなら難しい実装の詳細にとらわれることなくSymfonyのコンセプトと機能にフォーカスできるからです。このガイドではアプリケーションを一歩一歩開発する代わりに、コードのスニペットを見るだけですむでしょう。
 
-## Don't Update Your Existing Applications
-After reading this handbook, some of you may be considering refactoring your existing Symfony applications. Our recommendation is sound and clear: you should not refactor your existing applications to comply with these best practices. The reasons for not doing it are various:
+## 既存のアプリケーションをリファクタリングしないこと
+このハンドブックを読んだあとに、あなたは既存のSymfonyアプリケーションをリファクタリングしたくなるかもしれません。私達の推奨案は明確です: ベストプラクティスに合わせるために既存アプリケーションをリファクタリングすべきではありません。理由は様々です。:
 
- - Your existing applications are not wrong, they just follow another set of guidelines;
- - A full codebase refactorization is prone to introduce errors in your applications;
- - The amount of work spent on this could be better dedicated to improving your tests or adding features that provide real value to the end users.
+ - あなたの既存アプリケーションは間違っていません、それは別のガイドラインに従っているだけです;
+ - コードベースをがっつりリファクタリングするとバグを混入しがち;
+ - リファクタリングに時間を使うよりはテストの改善や機能追加をしてエンドユーザに実価値を届けるほうがよい;
