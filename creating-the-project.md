@@ -1,7 +1,6 @@
 # プロジェクトの作成
 ## Symfonyのインストール
-In the past, Symfony projects were created with Composer, the dependency manager for PHP applications. However, the current recommendation is to use the Symfony Installer, which has to be installed before creating your first project.
-以前は、SymfonyプロジェクトはPHPアプリケーションの依存パッケージ管理ツールであるComposerを使って作成されていました。しかしながら、これは最初のプロジェクトを作成する前にインストールする必要があるため、現在はSymfonyインストーラを使うことをお勧めします。←カーシャさんに聞く
+以前は、SymfonyプロジェクトはPHPアプリケーションの依存パッケージ管理ツールであるComposerを使って作成されていました。しかし現在は、Symfonyインストーラをプロジェクトを作成する前にインストールし使用することが推奨されています。
 
 **Best Practice**
 新しくSymfonyプロジェクトを作成するときは、Symfonyインストーラを使ってください。
