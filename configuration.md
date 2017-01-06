@@ -1,11 +1,11 @@
-# Configuration
-Configuration usually involves different application parts (such as infrastructure and security credentials) and different environments (development, production). That's why Symfony recommends that you split the application configuration into three parts.
+# 設定
+設定は大抵、アプリケーションの別々の部分（例えばインフラとユーザー権限のような）と別々の環境（開発環境、本番環境）に関係しています。Symfonyはアプリケーションの設定を3つの部分に分ける事をお勧めしています。
 
-## Infrastructure-Related Configuration
+## インフラに関係する設定
 **Best Practice**
-Define the infrastructure-related configuration options in the `app/config/parameters.yml` file.
+インフラに関係する設定は`app/config/parameters.yml`に定義してください。
 
-The default `parameters.yml` file follows this recommendation and defines the options related to the database and mail server infrastructure:
+デフォルトの`parameters.yml`はこの推奨に従っており、データベースとメールサーバに関連する設定が定義されています。
 
 ```
 # app/config/parameters.yml
@@ -25,13 +25,14 @@ parameters:
     # ...
 ```
 
-These options aren't defined inside the app/config/config.yml file because they have nothing to do with the application's behavior. In other words, your application doesn't care about the location of your database or the credentials to access to it, as long as the database is correctly configured.
+これらの設定は`app/config/config.yml`ファイルでは定義されていません。というのも、それらはアプリケーションの振る舞いに全く関係がないからです。言い換えると、アプリケーションはデータベースが正しく設定されている限りは、データベースの場所やアクセスするための認証情報に対して関心がないのです。
 
-## Canonical Parameters
+## 規範的なパラメータ
 **Best Practice**
-Define all your application's parameters in the `app/config/parameters.yml.dist` file.
+アプリケーションの全てのパラメータは`app/config/parameters.yml.dist`ファイルに定義してください。
 
-Symfony includes a configuration file called parameters.yml.dist, which stores the canonical list of configuration parameters for the application.
+Symfonyには`parameters.yml.dist`と呼ばれる設定ファイルが含まれており、アプリケーションのための規範的な設定のリストが保存されています。
+
 
 Whenever a new configuration parameter is defined for the application, you should also add it to this file and submit the changes to your version control system. Then, whenever a developer updates the project or deploys it to a server, Symfony will check if there is any difference between the canonical parameters.yml.dist file and your local parameters.yml file. If there is a difference, Symfony will ask you to provide a value for the new parameter and it will add it to your local parameters.yml file.
 
