@@ -33,13 +33,14 @@ parameters:
 
 Symfonyには`parameters.yml.dist`と呼ばれる設定ファイルが含まれており、アプリケーションのための規範的な設定のリストが保存されています。
 
+アプリケーションに新しい設定を定義したら、このファイルにも追加し変更をバージョン管理システムに送信しましょう。開発者がプロジェクトを更新したときやサーバにデプロイしたとき、Symfonyは`parameters.yml.dist`とローカルの`parameters.yml`の差分を調べます。もしそれらに差分があった場合
+、Symfonyは新しいパラメータの値を指定するように要求し、ローカルの`parameters.yml`ファイルに追加します。
 
-Whenever a new configuration parameter is defined for the application, you should also add it to this file and submit the changes to your version control system. Then, whenever a developer updates the project or deploys it to a server, Symfony will check if there is any difference between the canonical parameters.yml.dist file and your local parameters.yml file. If there is a difference, Symfony will ask you to provide a value for the new parameter and it will add it to your local parameters.yml file.
-
-## Application-Related Configuration
+## アプリケーションに関連する設定
 **Best Practice**
-Define the application behavior related configuration options in the `app/config/config.yml` file.
+アプリケーションの振る舞いに関係する設定は`app/config/config.yml`ファイルに定義してください。
 
+`config.yml`ファイルには
 The `config.yml` file contains the options used by the application to modify its behavior, such as the sender of email notifications, or the enabled feature toggles. Defining these values in `parameters.yml` file would add an extra layer of configuration that's not needed because you don't need or want these configuration values to change on each server.
 
 The configuration options defined in the `config.yml` file usually vary from one environment to another. That's why Symfony already includes `app/config/config_dev.yml` and `app/config/config_prod.yml` files so that you can override specific values for each environment.
