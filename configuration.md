@@ -58,8 +58,11 @@ parameters:
     homepage.num_items: 10
 ```
 
-過去にこのようなことをしていれば、
-If you've done something like this in the past, it's likely that you've in fact never actually needed to change that value. Creating a configuration option for a value that you are never going to configure just isn't necessary. Our recommendation is to define these values as constants in your application. You could, for example, define a `NUM_ITEMS` constant in the Post entity:
+過去にこのようなことをしていれば、その値の変更は本来必要ではなかったでしょう。変更する必要のない設定を作成する必要はありません。
+If you've done something like this in the past, it's likely that you've in fact never actually needed to change that value. Creating a configuration option for a value that you are never going to configure just isn't necessary. 
+→カーシャさんに聞く
+
+このような値は定数として定義することをお薦めします。例えば、PostエンティティのNUM_ITEMS定数として定義するのです。
 
 ```
 // src/AppBundle/Entity/Post.php
@@ -73,9 +76,9 @@ class Post
 }
 ```
 
-The main advantage of defining constants is that you can use their values everywhere in your application. When using parameters, they are only available from places with access to the Symfony container.
+定数を定義する主なメリットは、アプリケーション内のどこからでも利用できることです。パラメータを使った場合、Symfonyコンテナがアクセスできる場所でしか利用できません。
 
-Constants can be used for example in your Twig templates thanks to the constant() function:
+定数はconstant()関数のおかげで、Twigテンプレートでも使うことができます。
 
 ```
 <p>
