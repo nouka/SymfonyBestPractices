@@ -40,18 +40,17 @@ Symfonyには`parameters.yml.dist`と呼ばれる設定ファイルが含まれ�
 **Best Practice**
 アプリケーションの振る舞いに関係する設定は`app/config/config.yml`ファイルに定義してください。
 
-`config.yml`ファイルには
-The `config.yml` file contains the options used by the application to modify its behavior, such as the sender of email notifications, or the enabled feature toggles. Defining these values in `parameters.yml` file would add an extra layer of configuration that's not needed because you don't need or want these configuration values to change on each server.
+`config.yml`ファイルにはメール通知の送信先やFeature Toggleのように、アプリケーションの振る舞いを変える設定が含まれています。これらの設定を`parameters.yml`に定義してしまうと、サーバごとに変える必要のない設定までサーバごとに設定しなければならなくなります。 
 
-The configuration options defined in the `config.yml` file usually vary from one environment to another. That's why Symfony already includes `app/config/config_dev.yml` and `app/config/config_prod.yml` files so that you can override specific values for each environment.
+`config.yml`に定義されている設定は大抵、環境によって異なります。そこでSymfonyには`app/config/config_dev.yml`と`app/config/config_prod.yml`があり、環境ごとに値を上書きできるようになっています。
 
-## Constants vs Configuration Options
-One of the most common errors when defining application configuration is to create new options for values that never change, such as the number of items for paginated results.
+## 定数 vs 設定値
+アプリケーションの設定を定義するときに最もありがちなミスは、ページングの結果の件数のように、決して変わらない値を設定に作成してしまう事です。
 
 **Best Practice**
-Use constants to define configuration options that rarely change.
+滅多に変更しないオプションは定数として定義しましょう。
 
-The traditional approach for defining configuration options has caused many Symfony apps to include an option like the following, which would be used to control the number of posts to display on the blog homepage:
+設定を定義する伝統的なアプローチのために、多くのSymfonyアプリケーションに以下のような設定が含まれています。この設定はブログに表示する投稿の数を制御します。
 
 ```
 # app/config/config.yml
