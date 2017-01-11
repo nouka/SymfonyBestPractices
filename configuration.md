@@ -86,7 +86,7 @@ class Post
 </p>
 ```
 
-And Doctrine entities and repositories can now easily access these values, whereas they cannot access the container parameters:
+Doctrineのエンティティやrepositoriesはこれらの値に簡単にアクセスできます。一方で、コンテナのパラメータにはアクセスできません。
 
 ```
 namespace AppBundle\Repository;
@@ -103,15 +103,15 @@ class PostRepository extends EntityRepository
 }
 ```
 
-The only notable disadvantage of using constants for this kind of configuration values is that you cannot redefine them easily in your tests.
+設定に定数を使う唯一の弱点は、テストのときに簡単に値を上書きできない点です。
 
-## Semantic Configuration: Don't Do It
+## セマンティックな設定（やってはいけない）
 **Best Practice**
-Don't define a semantic dependency injection configuration for your bundles.
+バンドルの設定をセマンティックなDI設定として定義しないでください。
 
-As explained in How to Load Service Configuration inside a Bundle article, Symfony bundles have two choices on how to handle configuration: normal service configuration through the services.yml file and semantic configuration through a special \*Extension class.
+「How to Load Service Configuration inside a Bundle」の記事にもあるように、Symfonyバンドルには2つの設定の方法があります。`service.yml`を通して設定する通常の方法と、特別なExtensionクラスを通して設定するセマンティックな設定です。
 
-Although semantic configuration is much more powerful and provides nice features such as configuration validation, the amount of work needed to define that configuration isn't worth it for bundles that aren't meant to be shared as third-party bundles.
+セマンティックな設定は強力で、設定のバリデーションのように良い機能を提供しますが、設定を定義するために必要な作業が多いため、サードパーティのバンドルとして共有しない限りは価値がありません。
 
 ## Moving Sensitive Options Outside of Symfony Entirely
 When dealing with sensitive options, like database credentials, we also recommend that you store them outside the Symfony project and make them available through environment variables. Learn how to do it in the following article: How to Set external Parameters in the Service Container.
