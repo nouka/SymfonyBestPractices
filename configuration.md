@@ -114,5 +114,6 @@ class PostRepository extends EntityRepository
 セマンティックな設定は強力で、設定のバリデーションのように良い機能を提供しますが、設定を定義するために必要な作業が多いため、サードパーティのバンドルとして共有しない限りは価値がありません。
 
 ## センシティブな設定をSymfonyの外に完全に移動する
-データベースの接続情報のような機密性の高い設定を扱う場合、それらをSymfonyの外や環境変数のような
-When dealing with sensitive options, like database credentials, we also recommend that you store them outside the Symfony project and make them available through environment variables. Learn how to do it in the following article: How to Set external Parameters in the Service Container.
+データベースの接続情報のような機密性の高い設定を扱う場合、それらをSymfonyの外に保存し、環境変数を使って利用可能にすることをお薦めします。
+この方法は以下の記事で学ぶ事ができます。
+How to Set external Parameters in the Service Container.
