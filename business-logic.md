@@ -1,9 +1,9 @@
-# Organizing Your Business Logic
-In computer software, business logic or domain logic is "the part of the program that encodes the real-world business rules that determine how data can be created, displayed, stored, and changed" (read full definition).
+# ビジネスロジックを整理する
+コンピュータソフトウェアでは、データがどのように生成、表示、保存、変更されるかを決定する現実世界のビジネスルールを実装したプログラムのことを、ビジネスロジックまたはドメインロジックと言います（完全な定義を読む）。
 
-In Symfony applications, business logic is all the custom code you write for your app that's not specific to the framework (e.g. routing and controllers). Domain classes, Doctrine entities and regular PHP classes that are used as services are good examples of business logic.
+Symfonyアプリケーションでは、ビジネスロジックはフレームワーク（例えば、ルーティングやコントローラのような）に依存せず自由に書けます。サービスとして利用されるドメインのクラス、Doctrineのエンティティ、通常のPHPのクラスはビジネスロジックの良い例です。
 
-For most projects, you should store everything inside the AppBundle. Inside here, you can create whatever directories you want to organize things:
+多くのプロジェクトでは、AppBundleの中にすべてを保存するべきです。そこではあなたが整理したいことのために、どんなディレクトリでも作成できます。
 
 ```
 symfony-project/
@@ -18,8 +18,8 @@ symfony-project/
 └─ web/
 ```
 
-## Storing Classes Outside of the Bundle?
-But there's no technical reason for putting business logic inside of a bundle. If you like, you can create your own namespace inside the src/ directory and put things there:
+## クラスをバンドルの外に置きたい
+しかし、ビジネスロジックをバンドルの中に置く技術的な理由はありません。もしそちらの方が良ければ、好きな名前空間にsrcディレクトリを作成し、そこに置くこともできます。
 
 ```
 symfony-project/
@@ -35,12 +35,12 @@ symfony-project/
 └─ web/
 ```
 
-> The recommended approach of using the AppBundle/ directory is for simplicity. If you're advanced enough to know what needs to live in a bundle and what can live outside of one, then feel free to do that.
+> シンプルさのためにAppBundleディレクトリを使うことをお薦めします。もしあなたがバンドルの中に置くべきものと、そうでないものを充分に知っているならば、自由にしてください。
 
-## Services: Naming and Format
-The blog application needs a utility that can transform a post title (e.g. "Hello World") into a slug (e.g. "hello-world"). The slug will be used as part of the post URL.
+## サービス、命名と形式
+ブログアプリケーションは投稿のタイトル（Hello World）をスラグ（hello-world）に変換するユーティリティが必要です。スラグは投稿のURLに利用されます。
 
-Let's create a new `Slugger` class inside `src/AppBundle/Utils/` and add the following `slugify()` method:
+Sluggerクラスを`src/AppBundle/Utils/`に作ってみましょう。そして以下のようなslugifyメソッドを追加しましょう。
 
 ```
 // src/AppBundle/Utils/Slugger.php
@@ -57,7 +57,7 @@ class Slugger
 }
 ```
 
-Next, define a new service for that class.
+次に、クラスに新しいサービスを定義します。
 
 ```
 # app/config/services.yml
