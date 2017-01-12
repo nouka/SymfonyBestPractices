@@ -67,12 +67,12 @@ services:
         class: AppBundle\Utils\Slugger
 ```
 
-Traditionally, the naming convention for a service involved following the class name and location to avoid name collisions. Thus, the service would have been called app.utils.slugger. But by using short service names, your code will be easier to read and use.
+伝統的に、サービスの名前は、衝突を避けるためにクラス名とロケーションを組み合わせたものでした。従って、サービスはapp.utils.sluggerのように呼ばれていたでしょう。しかし短い名前を使うことで、コードは読みやすく使いやすくなるはずです。
 
 **Best Practice**
-The name of your application's services should be as short as possible, but unique enough that you can search your project for the service if you ever need to.
+アプリケーションのサービスの名前はできるだけ短くしてください。しかし、プロジェクト内で充分にユニークな名前であることを検索してください。
 
-Now you can use the custom slugger in any controller class, such as the AdminController:
+AdminControllerのようなどんなControllerクラスからも、sluggerクラスを使うことができるようになりました。
 
 ```
 public function createAction(Request $request)
@@ -88,18 +88,18 @@ public function createAction(Request $request)
 }
 ```
 
-## Service Format: YAML
-In the previous section, YAML was used to define the service.
+## サービスの形式、YAML
+前項では、サービスの定義にはYAMLが使われていました。
 
 **Best Practice**
-Use the YAML format to define your own services.
+サービスの定義にはYAMLを使ってください。
 
-This is controversial, and in our experience, YAML and XML usage is evenly distributed among developers, with a slight preference towards YAML. Both formats have the same performance, so this is ultimately a matter of personal taste.
+これは議論を呼ぶでしょうが、経験上、YAMLとXMLは開発者の中で均等に分布しており、ややYAMLが好まれる傾向にあります。どちらの形式も同じ機能なので、最終的には個人の好みの問題です。
 
-We recommend YAML because it's friendly to newcomers and concise. You can of course use whatever format you like.
+YAMLをお薦めするのは、簡潔で新人にもわかりやすいためです。どちらを使っても構いません。
 
-## Service: No Class Parameter
-You may have noticed that the previous service definition doesn't configure the class namespace as a parameter:
+## サービス、クラスをパラメータにしない
+前項でサービスを定義する際、クラスの名前空間をパラメータにしていないことに気づいたかもしれません。
 
 ```
 # app/config/services.yml
