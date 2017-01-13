@@ -113,12 +113,12 @@ services:
         class: '%slugger.class%'
 ```
 
-This practice is cumbersome and completely unnecessary for your own services.
+この方法は面倒で、サービスには全く必要ありません。
 
 **Best Practice**
-Don't define parameters for the classes of your services.
+サービスのクラスをパラメータとして定義しないでください。
 
-This practice was wrongly adopted from third-party bundles. When Symfony introduced its service container, some developers used this technique to easily allow overriding services. However, overriding a service by just changing its class name is a very rare use case because, frequently, the new service has different constructor arguments.
+この方法はサードパーティのバンドルから間違って採用されたものです。Symfonyがサービスコンテナを導入したとき、開発者の何人かはこのテクニックを使いサービスを上書きしやすくする人もいました。しかしながら、サービス名を変更しただけでサービスを上書きするケースは非常に稀です。なぜならば多くの場合、新しいサービスは異なったコンストラクタ引数を持っているからです。
 
 ## Using a Persistence Layer
 Symfony is an HTTP framework that only cares about generating an HTTP response for each HTTP request. That's why Symfony doesn't provide a way to talk to a persistence layer (e.g. database, external API). You can choose whatever library or strategy you want for this.
