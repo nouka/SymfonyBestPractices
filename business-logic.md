@@ -120,12 +120,12 @@ services:
 
 この方法はサードパーティのバンドルから間違って採用されたものです。Symfonyがサービスコンテナを導入したとき、開発者の何人かはこのテクニックを使いサービスを上書きしやすくする人もいました。しかしながら、サービス名を変更しただけでサービスを上書きするケースは非常に稀です。なぜならば多くの場合、新しいサービスは異なったコンストラクタ引数を持っているからです。
 
-## Using a Persistence Layer
-Symfony is an HTTP framework that only cares about generating an HTTP response for each HTTP request. That's why Symfony doesn't provide a way to talk to a persistence layer (e.g. database, external API). You can choose whatever library or strategy you want for this.
+## 永続化レイヤーを利用する
+SymfonyはHTTPのフレームワークで、各HTTPリクエストに対してHTTPレスポンスを生成することのみを受け持ちます。Symfonyが永続化レイヤー（データベース、外部APIなど）との通信方法を提供していないのは、このためです。あなたはどんなライブラリや戦略でも選ぶことができます。
 
-In practice, many Symfony applications rely on the independent Doctrine project to define their model using entities and repositories. Just like with business logic, we recommend storing Doctrine entities in the AppBundle.
+実際には、多くのSymfonyアプリケーションはDoctrineに依存しており、エンティティやリポジトリを使いモデルを定義しています。ビジネスロジックと同じく、DoctrineのエンティティもAppBundle配下に保存することをお薦めします。
 
-The three entities defined by our sample blog application are a good example:
+一例として、サンプルのブログアプリケーションで定義された3つのエンティティがあります。
 
 ```
 symfony-project/
