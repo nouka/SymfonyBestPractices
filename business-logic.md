@@ -138,15 +138,16 @@ symfony-project/
          └─ User.php
 ```
 
-> If you're more advanced, you can of course store them under your own namespace in `src/`.
+> もちろん独自の名前空間で`src/`ディレクトリの配下に保存することもできます。
 
-## Doctrine Mapping Information
-Doctrine entities are plain PHP objects that you store in some "database". Doctrine only knows about your entities through the mapping metadata configured for your model classes. Doctrine supports four metadata formats: YAML, XML, PHP and annotations.
+##  Doctrineのマッピング
+Doctrineのエンティティはデータベースに保存することができる、プレーンなPHPオブジェクトです。Doctrineはモデルクラスに対して設定されたメタデータを通してエンティティを扱います。
+DoctrineはYAML, XML, PHP, アノテーションの4つのメタデータの形式をサポートします。
 
 **Best Practice**
-Use annotations to define the mapping information of the Doctrine entities.
+Doctrineのエンティティのメタデータの定義にはアノテーションを使ってください。
 
-Annotations are by far the most convenient and agile way of setting up and looking for mapping information:
+アノテーションが最も便利で最速の方法だからです。
 
 ```
 namespace AppBundle\Entity;
@@ -213,10 +214,10 @@ class Post
 }
 ```
 
-All formats have the same performance, so this is once again ultimately a matter of taste.
+どの形式も同じ機能なので、最終的には開発者の好みの問題です。
 
-## Data Fixtures
-As fixtures support is not enabled by default in Symfony, you should execute the following command to install the Doctrine fixtures bundle:
+## データフィクスチャ
+Symfonyのデフォルトではフィクスチャは有効ではありません。以下のコマンドを実行して、フィクスチャバンドルをインストールしてください。
 
 ```
 $ composer require "doctrine/doctrine-fixtures-bundle"
