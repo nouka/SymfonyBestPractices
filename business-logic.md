@@ -89,17 +89,17 @@ public function createAction(Request $request)
 ```
 
 ## サービス定義: YAML
-In the previous section, YAML was used to define the service.
+前項では、サービスの定義にはYAMLが使われていました。
 
 **Best Practice**
-Use the YAML format to define your own services.
+サービスの定義にはYAMLを使ってください。
 
-This is controversial, and in our experience, YAML and XML usage is evenly distributed among developers, with a slight preference towards YAML. Both formats have the same performance, so this is ultimately a matter of personal taste.
+これは議論を呼ぶでしょうが、経験上、YAMLとXMLは開発者の中で均等に分布しており、ややYAMLが好まれる傾向にあります。どちらの形式も同じ機能なので、最終的には個人の好みの問題です。
 
-We recommend YAML because it's friendly to newcomers and concise. You can of course use whatever format you like.
+YAMLをお薦めするのは、簡潔で新人にもわかりやすいためです。どちらを使っても構いません。
 
-## Service: No Class Parameter
-You may have noticed that the previous service definition doesn't configure the class namespace as a parameter:
+## サービス、クラスをパラメータにしない
+前項でサービスを定義する際、クラスの名前空間をパラメータにしていないことに気づいたかもしれません。
 
 ```
 # app/config/services.yml
@@ -113,19 +113,19 @@ services:
         class: '%slugger.class%'
 ```
 
-This practice is cumbersome and completely unnecessary for your own services.
+この方法は面倒で、サービスには全く必要ありません。
 
 **Best Practice**
-Don't define parameters for the classes of your services.
+サービスのクラスをパラメータとして定義しないでください。
 
-This practice was wrongly adopted from third-party bundles. When Symfony introduced its service container, some developers used this technique to easily allow overriding services. However, overriding a service by just changing its class name is a very rare use case because, frequently, the new service has different constructor arguments.
+この方法はサードパーティのバンドルから間違って採用されたものです。Symfonyがサービスコンテナを導入したとき、開発者の何人かはこのテクニックを使いサービスを上書きしやすくする人もいました。しかしながら、サービス名を変更しただけでサービスを上書きするケースは非常に稀です。なぜならば多くの場合、新しいサービスは異なったコンストラクタ引数を持っているからです。
 
-## Using a Persistence Layer
-Symfony is an HTTP framework that only cares about generating an HTTP response for each HTTP request. That's why Symfony doesn't provide a way to talk to a persistence layer (e.g. database, external API). You can choose whatever library or strategy you want for this.
+## 永続化レイヤーを利用する
+SymfonyはHTTPのフレームワークで、各HTTPリクエストに対してHTTPレスポンスを生成することのみを受け持ちます。Symfonyが永続化レイヤー（データベース、外部APIなど）との通信方法を提供していないのは、このためです。あなたはどんなライブラリや戦略でも選ぶことができます。
 
-In practice, many Symfony applications rely on the independent Doctrine project to define their model using entities and repositories. Just like with business logic, we recommend storing Doctrine entities in the AppBundle.
+実際には、多くのSymfonyアプリケーションはDoctrineに依存しており、エンティティやリポジトリを使いモデルを定義しています。ビジネスロジックと同じく、DoctrineのエンティティもAppBundle配下に保存することをお薦めします。
 
-The three entities defined by our sample blog application are a good example:
+一例として、サンプルのブログアプリケーションで定義された3つのエンティティがあります。
 
 ```
 symfony-project/
@@ -138,15 +138,16 @@ symfony-project/
          └─ User.php
 ```
 
-> If you're more advanced, you can of course store them under your own namespace in `src/`.
+> もちろん独自の名前空間で`src/`ディレクトリの配下に保存することもできます。
 
-## Doctrine Mapping Information
-Doctrine entities are plain PHP objects that you store in some "database". Doctrine only knows about your entities through the mapping metadata configured for your model classes. Doctrine supports four metadata formats: YAML, XML, PHP and annotations.
+##  Doctrineのマッピング
+Doctrineのエンティティはデータベースに保存することができる、プレーンなPHPオブジェクトです。Doctrineはモデルクラスに対して設定されたメタデータを通してエンティティを扱います。
+DoctrineはYAML, XML, PHP, アノテーションの4つのメタデータの形式をサポートします。
 
 **Best Practice**
-Use annotations to define the mapping information of the Doctrine entities.
+Doctrineのエンティティのメタデータの定義にはアノテーションを使ってください。
 
-Annotations are by far the most convenient and agile way of setting up and looking for mapping information:
+アノテーションが最も便利で最速の方法だからです。
 
 ```
 namespace AppBundle\Entity;
@@ -213,10 +214,10 @@ class Post
 }
 ```
 
-All formats have the same performance, so this is once again ultimately a matter of taste.
+どの形式も同じ機能なので、最終的には開発者の好みの問題です。
 
-## Data Fixtures
-As fixtures support is not enabled by default in Symfony, you should execute the following command to install the Doctrine fixtures bundle:
+## データフィクスチャ
+Symfonyのデフォルトではフィクスチャは有効ではありません。以下のコマンドを実行して、フィクスチャバンドルをインストールしてください。
 
 ```
 $ composer require "doctrine/doctrine-fixtures-bundle"

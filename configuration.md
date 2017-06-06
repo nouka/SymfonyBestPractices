@@ -28,29 +28,30 @@ parameters:
 These options aren't defined inside the app/config/config.yml file because they have nothing to do with the application's behavior. In other words, your application doesn't care about the location of your database or the credentials to access to it, as long as the database is correctly configured.
 このオプションは`app/config/config.yml`では定義されていません。というのも、アプリケーションの振る舞いに全く関係がないからです。つまり、アプリケーションは、オプションが正しく設定されている限りでは、データベースの場所やユーザー名やパスワードに関心を持たないのです。
 
-## Canonical Parameters
+## 規範的なパラメータ
 **Best Practice**
-Define all your application's parameters in the `app/config/parameters.yml.dist` file.
+アプリケーションの全てのパラメータは`app/config/parameters.yml.dist`ファイルに定義してください。
 
-Symfony includes a configuration file called parameters.yml.dist, which stores the canonical list of configuration parameters for the application.
+Symfonyには`parameters.yml.dist`と呼ばれる設定ファイルが含まれており、アプリケーションのための規範的な設定のリストが保存されています。
 
-Whenever a new configuration parameter is defined for the application, you should also add it to this file and submit the changes to your version control system. Then, whenever a developer updates the project or deploys it to a server, Symfony will check if there is any difference between the canonical parameters.yml.dist file and your local parameters.yml file. If there is a difference, Symfony will ask you to provide a value for the new parameter and it will add it to your local parameters.yml file.
+アプリケーションに新しい設定を定義したら、このファイルにも追加し変更をバージョン管理システムに送信しましょう。開発者がプロジェクトを更新したときやサーバにデプロイしたとき、Symfonyは`parameters.yml.dist`とローカルの`parameters.yml`の差分を調べます。もしそれらに差分があった場合
+、Symfonyは新しいパラメータの値を指定するように要求し、ローカルの`parameters.yml`ファイルに追加します。
 
-## Application-Related Configuration
+## アプリケーションに関連する設定
 **Best Practice**
-Define the application behavior related configuration options in the `app/config/config.yml` file.
+アプリケーションの振る舞いに関係する設定は`app/config/config.yml`ファイルに定義してください。
 
-The `config.yml` file contains the options used by the application to modify its behavior, such as the sender of email notifications, or the enabled feature toggles. Defining these values in `parameters.yml` file would add an extra layer of configuration that's not needed because you don't need or want these configuration values to change on each server.
+`config.yml`ファイルにはメール通知の送信先やFeature Toggleのように、アプリケーションの振る舞いを変える設定が含まれています。これらの設定を`parameters.yml`に定義してしまうと、サーバごとに変える必要のない設定までサーバごとに設定しなければならなくなります。
 
-The configuration options defined in the `config.yml` file usually vary from one environment to another. That's why Symfony already includes `app/config/config_dev.yml` and `app/config/config_prod.yml` files so that you can override specific values for each environment.
+`config.yml`に定義されている設定は大抵、環境によって異なります。そこでSymfonyには`app/config/config_dev.yml`と`app/config/config_prod.yml`があり、環境ごとに値を上書きできるようになっています。
 
-## Constants vs Configuration Options
-One of the most common errors when defining application configuration is to create new options for values that never change, such as the number of items for paginated results.
+## 定数 vs 設定値
+アプリケーションの設定を定義するときに最もありがちなミスは、ページングの結果の件数のように、決して変わらない値を設定に作成してしまう事です。
 
 **Best Practice**
-Use constants to define configuration options that rarely change.
+滅多に変更しないオプションは定数として定義しましょう。
 
-The traditional approach for defining configuration options has caused many Symfony apps to include an option like the following, which would be used to control the number of posts to display on the blog homepage:
+設定を定義する伝統的なアプローチのために、多くのSymfonyアプリケーションに以下のような設定が含まれています。この設定はブログに表示する投稿の数を制御します。
 
 ```
 # app/config/config.yml
@@ -58,7 +59,11 @@ parameters:
     homepage.num_items: 10
 ```
 
-If you've done something like this in the past, it's likely that you've in fact never actually needed to change that value. Creating a configuration option for a value that you are never going to configure just isn't necessary. Our recommendation is to define these values as constants in your application. You could, for example, define a `NUM_ITEMS` constant in the Post entity:
+過去にこのようなことをしていれば、その値の変更は本来必要ではなかったでしょう。変更する必要のない設定を作成する必要はありません。
+If you've done something like this in the past, it's likely that you've in fact never actually needed to change that value. Creating a configuration option for a value that you are never going to configure just isn't necessary.
+→カーシャさんに聞く
+
+このような値は定数として定義することをお薦めします。例えば、PostエンティティのNUM_ITEMS定数として定義するのです。
 
 ```
 // src/AppBundle/Entity/Post.php
@@ -72,9 +77,9 @@ class Post
 }
 ```
 
-The main advantage of defining constants is that you can use their values everywhere in your application. When using parameters, they are only available from places with access to the Symfony container.
+定数を定義する主なメリットは、アプリケーション内のどこからでも利用できることです。パラメータを使った場合、Symfonyコンテナがアクセスできる場所でしか利用できません。
 
-Constants can be used for example in your Twig templates thanks to the constant() function:
+定数はconstant()関数のおかげで、Twigテンプレートでも使うことができます。
 
 ```
 <p>
@@ -82,7 +87,7 @@ Constants can be used for example in your Twig templates thanks to the constant(
 </p>
 ```
 
-And Doctrine entities and repositories can now easily access these values, whereas they cannot access the container parameters:
+Doctrineのエンティティやrepositoriesはこれらの値に簡単にアクセスできます。一方で、コンテナのパラメータにはアクセスできません。
 
 ```
 namespace AppBundle\Repository;
@@ -99,15 +104,17 @@ class PostRepository extends EntityRepository
 }
 ```
 
-The only notable disadvantage of using constants for this kind of configuration values is that you cannot redefine them easily in your tests.
+設定に定数を使う唯一の弱点は、テストのときに簡単に値を上書きできない点です。
 
-## Semantic Configuration: Don't Do It
+## セマンティックな設定（やってはいけない）
 **Best Practice**
-Don't define a semantic dependency injection configuration for your bundles.
+バンドルの設定をセマンティックなDI設定として定義しないでください。
 
-As explained in How to Load Service Configuration inside a Bundle article, Symfony bundles have two choices on how to handle configuration: normal service configuration through the services.yml file and semantic configuration through a special \*Extension class.
+「How to Load Service Configuration inside a Bundle」の記事にもあるように、Symfonyバンドルには2つの設定の方法があります。`service.yml`を通して設定する通常の方法と、特別なExtensionクラスを通して設定するセマンティックな設定です。
 
-Although semantic configuration is much more powerful and provides nice features such as configuration validation, the amount of work needed to define that configuration isn't worth it for bundles that aren't meant to be shared as third-party bundles.
+セマンティックな設定は強力で、設定のバリデーションのように良い機能を提供しますが、設定を定義するために必要な作業が多いため、サードパーティのバンドルとして共有しない限りは価値がありません。
 
-## Moving Sensitive Options Outside of Symfony Entirely
-When dealing with sensitive options, like database credentials, we also recommend that you store them outside the Symfony project and make them available through environment variables. Learn how to do it in the following article: How to Set external Parameters in the Service Container.
+## センシティブな設定をSymfonyの外に完全に移動する
+データベースの接続情報のような機密性の高い設定を扱う場合、それらをSymfonyの外に保存し、環境変数を使って利用可能にすることをお薦めします。
+この方法は以下の記事で学ぶ事ができます。
+How to Set external Parameters in the Service Container.
