@@ -1,9 +1,9 @@
-# Organizing Your Business Logic
-In computer software, business logic or domain logic is "the part of the program that encodes the real-world business rules that determine how data can be created, displayed, stored, and changed" (read full definition).
+# アプリケーションのビジネスロジックを整理する
+コンピュータソフトウェアの世界では、データがどのように作られ、表示され、保存され、変更されるかを決める現実世界のビジネスルールを実装したプログラムをビジネスロジックあるいはドメインロジックと呼びます。（完全な定義を読む）
 
-In Symfony applications, business logic is all the custom code you write for your app that's not specific to the framework (e.g. routing and controllers). Domain classes, Doctrine entities and regular PHP classes that are used as services are good examples of business logic.
+Symfonyのアプリケーションでは、ビジネスロジックは、フレームワーク（例えばルーティングやコントローラのような）に依存せず、自由に書くことができます。サービスとして使われるドメインのクラス、Doctrineのエンティティ、通常のPHPのクラスはビジネスロジックの一例です。
 
-For most projects, you should store everything inside the AppBundle. Inside here, you can create whatever directories you want to organize things:
+ほとんどのプロジェクトにおいて、開発者は全てをAppBundleに置くべきです。AppBundleの中では、ビジネスロジックを整理するための、どんなディレクトリでも作ることができます。
 
 ```
 symfony-project/
@@ -18,8 +18,8 @@ symfony-project/
 └─ web/
 ```
 
-## Storing Classes Outside of the Bundle?
-But there's no technical reason for putting business logic inside of a bundle. If you like, you can create your own namespace inside the src/ directory and put things there:
+## クラスをバンドルの外に置きたいですか？
+しかし、ビジネスロジックをバンドルの中に入れておく技術的な理由は何もありません。srcディレクトリの下に好きな名前空間を定義して、クラスをそこに置くこともできます。
 
 ```
 symfony-project/
@@ -35,12 +35,12 @@ symfony-project/
 └─ web/
 ```
 
-> The recommended approach of using the AppBundle/ directory is for simplicity. If you're advanced enough to know what needs to live in a bundle and what can live outside of one, then feel free to do that.
+> AppBundleを使うことをお勧めするのは簡単さのためです。バンドルの中に必要なものとバンドルの外でも問題ないものがよく理解できている場合は、クラスをAppBundleの外に置いても構いません。
 
-## Services: Naming and Format
-The blog application needs a utility that can transform a post title (e.g. "Hello World") into a slug (e.g. "hello-world"). The slug will be used as part of the post URL.
+## サービス: 命名と形式
+ブログアプリケーションに、“Hello World”のような投稿タイトルを“hello-world”のようなスラグに変換するユーティリティが必要だとします。スラグは、投稿のURLの一部として使われます。
 
-Let's create a new `Slugger` class inside `src/AppBundle/Utils/` and add the following `slugify()` method:
+新しいSluggerクラスを`src/AppBundle/Utils/`ディレクトリの配下に作り、下記のようなslugify()メソッドを実装してみましょう。
 
 ```
 // src/AppBundle/Utils/Slugger.php
@@ -57,7 +57,7 @@ class Slugger
 }
 ```
 
-Next, define a new service for that class.
+次に、このクラスのための新しいサービスを定義します。
 
 ```
 # app/config/services.yml
@@ -67,12 +67,12 @@ services:
         class: AppBundle\Utils\Slugger
 ```
 
-Traditionally, the naming convention for a service involved following the class name and location to avoid name collisions. Thus, the service would have been called app.utils.slugger. But by using short service names, your code will be easier to read and use.
+伝統的に、サービスの名前は、衝突を避けるためにクラス名とクラスの場所を組み合わせたものでした。そうすると、このサービスはapp.utils.sluggerと呼ばれるはずです。しかし、短い名前を使うことで、コードの読みやすさと使いやすさは向上するでしょう。
 
 **Best Practice**
-The name of your application's services should be as short as possible, but unique enough that you can search your project for the service if you ever need to.
+アプリケーションのサービス名は可能な限り短くしましょう。必要があれば一意なものにしてください。
 
-Now you can use the custom slugger in any controller class, such as the AdminController:
+これでAdminControllerのようなどんなコントローラーからでもsluggerを利用できるようになりました。
 
 ```
 public function createAction(Request $request)
@@ -88,7 +88,7 @@ public function createAction(Request $request)
 }
 ```
 
-## Service Format: YAML
+## サービス定義: YAML
 In the previous section, YAML was used to define the service.
 
 **Best Practice**

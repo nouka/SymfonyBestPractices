@@ -1,11 +1,11 @@
-# Configuration
-Configuration usually involves different application parts (such as infrastructure and security credentials) and different environments (development, production). That's why Symfony recommends that you split the application configuration into three parts.
+# 設定
+設定は、大抵、アプリケーション内の別々の部分（例えば、インフラとユーザー権限のような）と別々の環境（開発環境、プロダクション環境）に関連しています。そこで、Symfonyはアプリケーションの設定を3つの部分に分けて考えるようにしています。
 
-## Infrastructure-Related Configuration
+## インフラに関係する設定
 **Best Practice**
-Define the infrastructure-related configuration options in the `app/config/parameters.yml` file.
+インフラに関係する設定オプションは`app/config/parameters.yml`ファイルに定義しましょう。
 
-The default `parameters.yml` file follows this recommendation and defines the options related to the database and mail server infrastructure:
+デフォルトの`parameters.yml`ファイルはそうなっており、データベースとメールサーバーの設定を定義しています。
 
 ```
 # app/config/parameters.yml
@@ -26,6 +26,7 @@ parameters:
 ```
 
 These options aren't defined inside the app/config/config.yml file because they have nothing to do with the application's behavior. In other words, your application doesn't care about the location of your database or the credentials to access to it, as long as the database is correctly configured.
+このオプションは`app/config/config.yml`では定義されていません。というのも、アプリケーションの振る舞いに全く関係がないからです。つまり、アプリケーションは、オプションが正しく設定されている限りでは、データベースの場所やユーザー名やパスワードに関心を持たないのです。
 
 ## Canonical Parameters
 **Best Practice**

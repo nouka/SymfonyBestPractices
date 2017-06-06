@@ -6,7 +6,7 @@ Discover the best practices that fit the philosophy of the framework as envision
 
  - [Symfony ベストプラクティス集](./introduction.md)
  - [プロジェクトの作成](./creating-the-project.md)
- - [Configuration](./configuration.md)
+ - [設定](./configuration.md)
  - [Organizing Your Business Logic](./business-logic.md)
  - [Controllers](./controllers.md)
  - [Templates](./templates.md)
